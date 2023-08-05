@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="container fluid" style="margin: 200px;">
+
+    {% for i in posts %}
+        <br>
+        <li>{{ i.titulo }}</li>
+        <li>{{ i.subtitulo }}</li>
+        <li>{{ i.categoria }}</li>
+        <br>
+        <a id='boton_posts' href='{% url 'apps.posts:posts_individual' pk=i.id %}'>
+            Ver más
+        </a>
+
+        {% empty %}
+    <h1> No hay registros</h1>
+
+    {% endfor %}
+</div>
+{% endblock %}

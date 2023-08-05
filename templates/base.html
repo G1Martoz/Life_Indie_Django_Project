@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Título</title>
+    <!-- Agrega la hoja de estilos de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="py-4 px-4 navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="{% url 'home' %}" class="navbar-brand text-xl font-weight-bold" id="grupo7">Life Indie</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'apps.posts:posts' %}">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'apps.usuario:login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'apps.contacto:contacto' %}">Contacto</a>
+            </li>
+        </ul>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="btn btn-secondary">Cerrar Sesion</a>
+        {% else %}
+            <a href="{% url 'apps.usuario:RegistrarUsuario' %}" class="btn btn-warning">Registrarse</a>
+            <a href="{% url 'apps.usuario:login' %}" class="btn btn-danger">Iniciar Sesion</a>
+        {% endif %}
+    </div>
+</nav>
+
+    {% block contenido %}
+    {% endblock %}
+
+
+<div class="container-fluid">
+    <!-- Aquí puedes agregar el contenido de tu página -->
+</div>
+
+<!-- Agrega los scripts de Bootstrap al final del documento -->
+
+
+</body>
+</html>

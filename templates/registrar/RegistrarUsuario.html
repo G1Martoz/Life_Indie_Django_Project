@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+<title>{% block title %} Registro de usuario {% endblock title %}</title>
+
+{% block contenido %}
+<center>
+
+    <form method="POST" enctype="multipart/form-data" style="margin-top: 300px; margin-bottom: 100px;">
+        <h1 class="h1">Registro de usuarios</h1>
+        <br>
+        {%  block content %}
+        <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+            <h1 class="mb-6 text-3xl">Registro</h1>
+        <form action="." method="post">
+            {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="" class="inline-block mb-2">Usuario</label><br>
+            {{form.username}}
+        </div>
+        <div class="mb-3">
+            <label for="" class="inline-block mb-2">Email</label><br>
+            {{form.email}}
+        </div>
+        <div class="mb-3">
+            <label for="" class="inline-block mb-2">Contraseña</label><br>
+            {{form.password1}}
+        </div>
+        <div class="mb-3">
+            <label for="" class="inline-block mb-2">Repita su Contraseña</label><br>
+            {{form.password2}}
+        </div>
+
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                {% for field in form %}
+                    {{field.errors}}
+                {% endfor %}
+                {{form.non.fields_errors}}
+            </div>
+        {% endif %}
+
+        <div class="text-center">
+            <button class="py-4 px-8 text-lg bg-rose-600 hover:bg-rose-800 rounded-xl text-white">
+                Registrarse
+            </button>
+        </div>
+    </form>
+        </div>
+        {% endblock %}
+        <div class="messages">
+            {% for message in messages %}
+                <table {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}</table>
+            {% endfor %}
+        </div>
+        <br>
+        {% csrf_token %}
+        <div class="container-fluid">
+            <table>{{ form }}</table>
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-success btn-lg px-3">Registrar</button>
+    </form>
+
+</center>
+{% endblock %}
